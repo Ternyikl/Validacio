@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form method="post">
+        <label for="price">Price: </label>
+        <input type="number" name="price" value="<%= locals.body?.price %>"> <br>
+        <label>
+            <input type="radio" name="type" value="router"
+                <%= locals.body?.type === 'router' ? 'checked' : '' %>
+            >
+            Router
+        </label>
+        <label><br>
+            <input type="radio" name="type" value="switch"
+                <%= locals.body?.type === 'switch' ? 'ckecked' : '' %>
+            >
+            Switch
+        </label>
+        <label><br>
+            <input type="radio" name="type" value="firewall"
+                <%= locals.body?.type === 'firewall' ? 'checked' : '' %>
+            >
+            Firewall
+        </label> <br>
+        <label for="serial">Serial number</label>
+        <input type="text" name="serial" value="<%= locals.body?.serial %>"> <br>
+
+        <% if(locals.errors && locals.errors.length > 0)  {%>
+            <ul style="color: red;">
+                <% locals.errors.forEach(e => {%>
+                    <li><%= e %></li>
+                <%}); %>
+            </ul>
+        <%}%>
+
+        <button type="submit">Add new device</button>
+
+        <% if(locals.success)  {%>
+            <p style="color: green;">Successfully added to Database</p>
+        <%}%>
+    </form>
+</body>
+</html>
